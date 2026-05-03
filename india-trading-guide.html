@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Indian Stock Markets — Beginner's Field Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --ink: #1a1209;
+  --paper: #f5f0e8;
+  --paper2: #ede7d6;
+  --paper3: #e4dcc8;
+  --accent: #c8420a;
+  --accent2: #1a6b3a;
+  --accent3: #0a4a7a;
+  --gold: #b8860b;
+  --rule: rgba(26,18,9,0.15);
+  --shadow: rgba(26,18,9,0.12);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(26,18,9,0.04) 27px, rgba(26,18,9,0.04) 28px);
+}
+
+/* ── HEADER ── */
+header {
+  background: #fff;
+  color: var(--ink);
+  padding: 60px 40px 48px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--accent);
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,66,10,0.025) 40px, rgba(200,66,10,0.025) 41px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(200,66,10,0.015) 40px, rgba(200,66,10,0.015) 41px);
+}
+.header-inner { max-width: 900px; margin: 0 auto; position: relative; }
+.header-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(26,18,9,0.4);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-eyebrow::after { content: ''; flex: 1; height: 1px; background: rgba(26,18,9,0.12); }
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 62px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.header-sub {
+  font-size: 15px;
+  color: rgba(26,18,9,0.6);
+  max-width: 520px;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.header-meta {
+  display: flex;
+  gap: 24px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.header-meta span {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(26,18,9,0.45);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.header-meta span::before { content: '◆'; font-size: 6px; color: var(--accent); }
+
+/* ── NAV ── */
+nav {
+  background: #fff;
+  border-bottom: 2px solid var(--accent);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav ul {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  list-style: none;
+  overflow-x: auto;
+  padding: 0 20px;
+  scrollbar-width: none;
+}
+nav ul::-webkit-scrollbar { display: none; }
+nav li a {
+  display: block;
+  padding: 12px 16px;
+  color: rgba(26,18,9,0.45);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+nav li a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+/* ── SECTIONS ── */
+.chapter {
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--rule);
+}
+.chapter:last-child { border-bottom: none; }
+
+.chapter-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.chapter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 72px;
+  font-weight: 900;
+  line-height: 0.85;
+  color: var(--paper3);
+  flex-shrink: 0;
+  letter-spacing: -0.04em;
+  user-select: none;
+}
+.chapter-title-block { flex: 1; }
+.chapter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+}
+h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3.5vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.chapter-intro {
+  font-size: 15px;
+  color: rgba(26,18,9,0.65);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 32px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+h3::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+p { margin-bottom: 14px; color: rgba(26,18,9,0.82); }
+
+/* ── COMPARISON TABLE ── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0 28px;
+}
+.compare-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.compare-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.compare-card.nse::before { background: var(--accent2); }
+.compare-card.bse::before { background: var(--accent3); }
+.compare-card .label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.compare-card.nse .label { color: var(--accent2); }
+.compare-card.bse .label { color: var(--accent3); }
+.compare-card .name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.compare-card ul { list-style: none; }
+.compare-card ul li {
+  font-size: 13px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(26,18,9,0.06);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: rgba(26,18,9,0.75);
+}
+.compare-card ul li::before { content: '→'; font-size: 11px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+
+/* ── TIMELINE ── */
+.timeline { margin: 20px 0 28px; position: relative; }
+.timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: var(--rule); }
+.timeline-item { display: flex; gap: 20px; margin-bottom: 20px; position: relative; }
+.timeline-dot {
+  width: 33px; height: 33px;
+  background: var(--accent);
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.timeline-content { padding-top: 6px; flex: 1; }
+.timeline-content strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.timeline-content span { font-size: 12px; color: rgba(26,18,9,0.6); }
+
+/* ── CALLOUT BOXES ── */
+.callout {
+  padding: 18px 22px;
+  border-radius: 4px;
+  margin: 20px 0 24px;
+  border-left: 3px solid;
+  background: white;
+}
+.callout.warning { border-color: var(--accent); background: rgba(200,66,10,0.04); }
+.callout.tip     { border-color: var(--accent2); background: rgba(26,107,58,0.04); }
+.callout.info    { border-color: var(--accent3); background: rgba(10,74,122,0.04); }
+.callout-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.callout.warning .callout-label { color: var(--accent); }
+.callout.tip .callout-label { color: var(--accent2); }
+.callout.info .callout-label { color: var(--accent3); }
+.callout p { margin: 0; font-size: 13px; line-height: 1.65; }
+
+/* ── INDICATOR GRID ── */
+.indicator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0 28px; }
+.indicator-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 16px;
+}
+.ind-name { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--accent); margin-bottom: 4px; }
+.ind-full { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.ind-desc { font-size: 12px; color: rgba(26,18,9,0.65); line-height: 1.5; }
+.ind-signal { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--rule); font-size: 11px; }
+.ind-signal span { font-family: 'DM Mono', monospace; }
+.bull { color: var(--accent2); }
+.bear { color: var(--accent); }
+
+/* ── STRATEGY CARDS ── */
+.strategy-grid { display: grid; gap: 16px; margin: 20px 0 28px; }
+.strategy-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 20px;
+}
+.strat-badge {
+  background: var(--paper3);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 10px 8px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+}
+.strat-badge .s-type { font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(26,18,9,0.45); margin-bottom: 6px; }
+.strat-badge .s-icon { font-size: 24px; line-height: 1; }
+.strat-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+.strat-desc { font-size: 13px; color: rgba(26,18,9,0.7); line-height: 1.55; margin-bottom: 12px; }
+.strat-rules { list-style: none; }
+.strat-rules li { font-size: 12px; padding: 3px 0; color: rgba(26,18,9,0.7); display: flex; gap: 8px; }
+.strat-rules li::before { content: '›'; color: var(--gold); font-size: 14px; line-height: 1.3; flex-shrink: 0; }
+
+/* ── SECTORS ── */
+.sector-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 20px 0 28px; }
+.sector-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 14px;
+  text-align: center;
+}
+.sector-icon { font-size: 24px; margin-bottom: 6px; }
+.sector-name { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+.sector-stocks { font-family: 'DM Mono', monospace; font-size: 9px; color: rgba(26,18,9,0.5); line-height: 1.5; }
+
+/* ── RISK CALCULATOR (visual) ── */
+.risk-example {
+  background: #f8f4ee;
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px;
+  margin: 20px 0 28px;
+  font-family: 'DM Mono', monospace;
+}
+.risk-example .title { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(26,18,9,0.45); margin-bottom: 18px; }
+.risk-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(26,18,9,0.08); }
+.risk-row:last-child { border-bottom: none; }
+.risk-row .key { font-size: 11px; color: rgba(26,18,9,0.55); }
+.risk-row .val { font-size: 14px; font-weight: 500; color: var(--ink); }
+.risk-row .val.green { color: #166b32; }
+.risk-row .val.red { color: #a81c1c; }
+.risk-row .val.yellow { color: #7a5800; }
+
+/* ── GLOSSARY ── */
+.glossary { columns: 2; gap: 28px; margin: 20px 0; }
+.glossary-item { break-inside: avoid; margin-bottom: 16px; }
+.g-term {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+.g-term::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.g-def { font-size: 12px; color: rgba(26,18,9,0.7); line-height: 1.5; }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; margin: 16px 0 24px; }
+.checklist li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(26,18,9,0.06);
+  font-size: 13px;
+}
+.checklist li::before {
+  content: '□';
+  font-size: 16px;
+  color: var(--accent);
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: #f0ebe0;
+  color: rgba(26,18,9,0.45);
+  border-top: 2px solid var(--rule);
+  text-align: center;
+  padding: 32px 24px;
+  margin-top: 60px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+footer strong { color: rgba(26,18,9,0.75); }
+
+/* ── PROGRESS BAR ── */
+.reading-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  background: var(--accent);
+  width: 0%;
+  transition: width 0.1s;
+  z-index: 999;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 680px) {
+  .compare-grid, .indicator-grid, .sector-grid { grid-template-columns: 1fr 1fr; }
+  .glossary { columns: 1; }
+  .strategy-card { grid-template-columns: 1fr; }
+  .strat-badge { display: none; }
+}
+@media (max-width: 420px) {
+  .compare-grid, .sector-grid { grid-template-columns: 1fr; }
+  h1 { font-size: 30px; }
+  .chapter-num { font-size: 48px; }
+}
+</style>
+</head>
+<body>
+
+<div class="reading-bar" id="rbar"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-eyebrow">India Trading System &nbsp;·&nbsp; Knowledge Repository</div>
+    <h1>The Beginner's<br /><em>Field Guide</em> to<br />Indian Markets</h1>
+    <p class="header-sub">Everything you need to start paper trading on NSE and BSE — from how markets work to your first real strategy.</p>
+    <div class="header-meta">
+      <span>8 Chapters</span>
+      <span>NSE &amp; BSE</span>
+      <span>Intraday · Swing · Long Term</span>
+      <span>Phase 1 — Foundation</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <ul>
+    <li><a href="#markets">Markets</a></li>
+    <li><a href="#timing">Timing</a></li>
+    <li><a href="#participants">Who Moves It</a></li>
+    <li><a href="#indicators">Indicators</a></li>
+    <li><a href="#strategies">Strategies</a></li>
+    <li><a href="#risk">Risk</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<!-- ── CHAPTER 1: MARKETS ── -->
+<section class="chapter" id="markets">
+  <div class="chapter-header">
+    <div class="chapter-num">01</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Foundation</span>
+      <h2>NSE vs BSE — India's Two Exchanges</h2>
+      <p class="chapter-intro">Before placing your first trade, you need to know where stocks are traded in India.</p>
+    </div>
+  </div>
+
+  <p>India has two major stock exchanges. Both list the same large-cap stocks, but they differ in history, benchmarks, and what traders typically use.</p>
+
+  <div class="compare-grid">
+    <div class="compare-card nse">
+      <div class="label">NSE · Preferred by traders</div>
+      <div class="name">National Stock Exchange</div>
+      <ul>
+        <li>Founded 1992 — newer but bigger volume</li>
+        <li>Benchmark: <strong>Nifty 50</strong> (top 50 companies)</li>
+        <li>Better liquidity for most stocks</li>
+        <li>Where intraday traders prefer to operate</li>
+        <li>Suffix to use: <code>RELIANCE.NS</code></li>
+      </ul>
+    </div>
+    <div class="compare-card bse">
+      <div class="label">BSE · Oldest in Asia</div>
+      <div class="name">Bombay Stock Exchange</div>
+      <ul>
+        <li>Founded 1875 — oldest in Asia</li>
+        <li>Benchmark: <strong>Sensex</strong> (top 30 companies)</li>
+        <li>More small/mid-cap listings</li>
+        <li>Good for long-term investors</li>
+        <li>Suffix to use: <code>RELIANCE.BO</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-label">Beginner Tip</div>
+    <p>As a beginner, focus only on <strong>Nifty 50 stocks on NSE</strong>. These are India's 50 largest, most liquid companies. High liquidity means you can enter and exit trades easily without price slippage. Avoid penny stocks and unknown small-caps until you have experience.</p>
+  </div>
+
+  <h3>What is Nifty 50?</h3>
+  <p>The Nifty 50 is NSE's flagship index — a basket of India's 50 largest companies by market capitalisation. When people say "the market went up today", they usually mean Nifty 50 moved up. It's the pulse of the Indian economy. If Nifty is falling, most stocks fall with it. If Nifty is rising, most stocks rise.</p>
+
+  <div class="callout info">
+    <div class="callout-label">Key Fact</div>
+    <p>Nifty 50 is dominated by <strong>Banking (30%)</strong>, <strong>IT (15%)</strong>, and <strong>Energy (12%)</strong>. When FIIs sell banking stocks, Nifty often falls even if other sectors are fine. Always watch banking stocks and RELIANCE — they move the index most.</p>
+  </div>
+</section>
+
+<!-- ── CHAPTER 2: TIMING ── -->
+<section class="chapter" id="timing">
+  <div class="chapter-header">
+    <div class="chapter-num">02</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Operations</span>
+      <h2>Market Timings &amp; Sessions</h2>
+      <p class="chapter-intro">Indian markets run on IST (Indian Standard Time, UTC+5:30). All times below are IST.</p>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot">8:00</div>
+      <div class="timeline-content">
+        <strong>SGX Nifty / Gift Nifty Opens</strong>
+        <span>Singapore exchange trades Indian futures. Gives early indication of where Nifty will open. Check this before market opens.</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">9:00</div>
+      <div class="timeline-content">
+        <strong>Pre-Open Session Begins</strong>
+        <span>Orders are collected but not executed. Price discovery happens here. The opening price is set based on pre-open orders.</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">9:15</div>
+      <div class="timeline-content">
+        <strong>🔔 Market Opens — Trading Begins</strong>
+        <span>This is the most volatile 15 minutes of the day. Intraday traders watch the 9:15–9:30 AM range very closely (Opening Range Breakout strategy).</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">11:30</div>
+      <div class="timeline-content">
+        <strong>Mid-Session Lull</strong>
+        <span>Volume and volatility typically reduce. Not ideal for intraday trades. Good time to review your open positions.</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">2:30</div>
+      <div class="timeline-content">
+        <strong>Afternoon Rally / Sell-off</strong>
+        <span>Volume picks up again. US pre-market opens, influencing IT and global stocks. Intraday positions should ideally be squared off here.</span>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">3:30</div>
+      <div class="timeline-content">
+        <strong>🔕 Market Closes</strong>
+        <span>All intraday positions must be squared off before this. After 3:30 PM, no new intraday orders. Post-close session for delivery trades until 4:00 PM.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-label">Critical for Intraday Traders</div>
+    <p>If you have an intraday (MIS) position open at 3:20 PM, your broker will auto-square it off at market price — often unfavourable. <strong>Always square off intraday positions before 3:15 PM</strong> to stay in control of your exit price.</p>
+  </div>
+</section>
+
+<!-- ── CHAPTER 3: PARTICIPANTS ── -->
+<section class="chapter" id="participants">
+  <div class="chapter-header">
+    <div class="chapter-num">03</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Market Forces</span>
+      <h2>Who Moves Indian Markets?</h2>
+      <p class="chapter-intro">Understanding who the big players are helps you trade with the trend, not against it.</p>
+    </div>
+  </div>
+
+  <h3>FII — Foreign Institutional Investors</h3>
+  <p>Foreign funds (American, European, Japanese) that invest in Indian stocks. They manage trillions of dollars and their flows are the single biggest driver of Nifty direction on any given day.</p>
+
+  <div class="compare-grid">
+    <div class="compare-card nse">
+      <div class="label">When FIIs Buy</div>
+      <div class="name" style="font-size:18px">Bullish Signal 📈</div>
+      <ul>
+        <li>Nifty typically rises</li>
+        <li>Large-cap stocks benefit most</li>
+        <li>INR strengthens (more $ coming in)</li>
+        <li>Often happens when US dollar weakens</li>
+      </ul>
+    </div>
+    <div class="compare-card bse">
+      <div class="label">When FIIs Sell</div>
+      <div class="name" style="font-size:18px">Bearish Signal 📉</div>
+      <ul>
+        <li>Nifty often falls even if India is fine</li>
+        <li>INR weakens ($ going out)</li>
+        <li>Happens when US rates rise (better returns abroad)</li>
+        <li>Can cause 2–5% corrections in weeks</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>DII — Domestic Institutional Investors</h3>
+  <p>Indian mutual funds, LIC, and insurance companies. They act as a cushion — when FIIs sell, DIIs often buy, limiting the downside. India's domestic SIP (Systematic Investment Plan) inflows now exceed ₹20,000 crore per month, making DIIs a permanent stabilising force in the market.</p>
+
+  <h3>Retail Traders (You)</h3>
+  <p>Individual investors and traders like you. Retail accounts for about 45% of trading volume but typically follows institutional flows rather than leading them. Smart retail trading means identifying what FIIs and DIIs are doing and aligning with their direction.</p>
+
+  <div class="callout info">
+    <div class="callout-label">Where to Check FII/DII Data Daily</div>
+    <p>Go to <strong>nseindia.com → Market Data → FII/DII Activity</strong>. This is published every evening after market close. Check it every day — it takes 2 minutes and gives you massive context for the next day's trading.</p>
+  </div>
+
+  <h3>RBI — Reserve Bank of India</h3>
+  <p>India's central bank. Its Monetary Policy Committee (MPC) meets 6 times a year. The <strong>repo rate</strong> (what rate RBI lends to banks) is the most watched number. Rate hikes hurt banking and real estate stocks. Rate cuts benefit them. The announcement date is always a high-volatility day.</p>
+</section>
+
+<!-- ── CHAPTER 4: INDICATORS ── -->
+<section class="chapter" id="indicators">
+  <div class="chapter-header">
+    <div class="chapter-num">04</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Technical Analysis</span>
+      <h2>The 6 Indicators Every Beginner Needs</h2>
+      <p class="chapter-intro">Don't use more than 2–3 at a time. More indicators = more confusion, not more accuracy.</p>
+    </div>
+  </div>
+
+  <div class="indicator-grid">
+    <div class="indicator-card">
+      <div class="ind-name">RSI</div>
+      <div class="ind-full">Relative Strength Index</div>
+      <div class="ind-desc">Measures how fast price is moving. Ranges 0–100. Best on 14-period setting.</div>
+      <div class="ind-signal">
+        <span class="bull">RSI &lt; 30 = Oversold → Buy opportunity</span><br/>
+        <span class="bear">RSI &gt; 70 = Overbought → Exit signal</span>
+      </div>
+    </div>
+    <div class="indicator-card">
+      <div class="ind-name">EMA</div>
+      <div class="ind-full">Exponential Moving Average</div>
+      <div class="ind-desc">Tracks average price, giving more weight to recent candles. Faster to react than SMA.</div>
+      <div class="ind-signal">
+        <span class="bull">Fast EMA crosses above Slow EMA = Buy</span><br/>
+        <span class="bear">Fast EMA crosses below Slow EMA = Sell</span>
+      </div>
+    </div>
+    <div class="indicator-card">
+      <div class="ind-name">MACD</div>
+      <div class="ind-full">Moving Avg Convergence Divergence</div>
+      <div class="ind-desc">Shows momentum. Uses 12, 26, 9 EMA combo. Look for MACD line crossing signal line.</div>
+      <div class="ind-signal">
+        <span class="bull">MACD crosses above signal line = Bullish</span><br/>
+        <span class="bear">MACD crosses below = Bearish</span>
+      </div>
+    </div>
+    <div class="indicator-card">
+      <div class="ind-name">VWAP</div>
+      <div class="ind-full">Volume Weighted Avg Price</div>
+      <div class="ind-desc">Average price weighted by volume. Resets daily. Used by institutional traders to evaluate entry quality.</div>
+      <div class="ind-signal">
+        <span class="bull">Price above VWAP = Bullish intraday</span><br/>
+        <span class="bear">Price below VWAP = Bearish intraday</span>
+      </div>
+    </div>
+    <div class="indicator-card">
+      <div class="ind-name">ATR</div>
+      <div class="ind-full">Average True Range</div>
+      <div class="ind-desc">Measures volatility — how much a stock moves on average. Critical for setting stop losses intelligently.</div>
+      <div class="ind-signal">
+        <span>Stop Loss = Entry − (1.5 × ATR)</span><br/>
+        <span>High ATR = wider SL needed</span>
+      </div>
+    </div>
+    <div class="indicator-card">
+      <div class="ind-name">S/R</div>
+      <div class="ind-full">Support &amp; Resistance</div>
+      <div class="ind-desc">Price levels where stocks historically reverse. Not a formula — identified by eye on charts.</div>
+      <div class="ind-signal">
+        <span class="bull">Buy near support, place SL just below</span><br/>
+        <span class="bear">Sell near resistance or when support breaks</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-label">The Indicator Trap</div>
+    <p>Beginners often add 5–6 indicators hoping for "certainty." This creates <strong>analysis paralysis</strong> — conflicting signals that paralyse decisions. Start with just <strong>EMA (trend) + RSI (momentum)</strong>. That's the combo used in your backtester and it's more than enough to start.</p>
+  </div>
+</section>
+
+<!-- ── CHAPTER 5: STRATEGIES ── -->
+<section class="chapter" id="strategies">
+  <div class="chapter-header">
+    <div class="chapter-num">05</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Trading Strategies</span>
+      <h2>Your Three Starter Strategies</h2>
+      <p class="chapter-intro">One for each style — intraday, swing, and long-term. Master these before adding others.</p>
+    </div>
+  </div>
+
+  <div class="strategy-grid">
+    <div class="strategy-card">
+      <div class="strat-badge">
+        <div class="s-type">Intraday</div>
+        <div class="s-icon">⚡</div>
+      </div>
+      <div>
+        <div class="strat-name">Opening Range Breakout (ORB)</div>
+        <div class="strat-desc">Note the High and Low of the first 15 minutes (9:15–9:30 AM). Trade the breakout from this range with volume confirmation.</div>
+        <ul class="strat-rules">
+          <li>Mark the 9:15–9:30 AM high and low on your chart</li>
+          <li>If price breaks above the high with volume surge → BUY</li>
+          <li>If price breaks below the low with volume surge → SHORT</li>
+          <li>Stop loss = other end of the opening range</li>
+          <li>Target = 1.5× to 2× the range width</li>
+          <li>Best on: RELIANCE, HDFCBANK, TCS, Bank Nifty</li>
+          <li>Exit by 3:00 PM regardless</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="strategy-card">
+      <div class="strat-badge">
+        <div class="s-type">Swing</div>
+        <div class="s-icon">〰</div>
+      </div>
+      <div>
+        <div class="strat-name">EMA Crossover (9/21 or 20/50)</div>
+        <div class="strat-desc">Use the daily chart. When the faster EMA crosses above the slower EMA, a new uptrend is beginning. Hold the trade for days to weeks.</div>
+        <ul class="strat-rules">
+          <li>Plot 9 EMA and 21 EMA on daily chart</li>
+          <li>Wait for 9 EMA to cross above 21 EMA → BUY</li>
+          <li>Confirm with RSI between 45–60 (not overbought)</li>
+          <li>Stop loss = below recent swing low or 21 EMA</li>
+          <li>Target = 1.5× to 2× your risk</li>
+          <li>Hold for 5–15 days typically</li>
+          <li>Exit when 9 EMA crosses back below 21 EMA</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="strategy-card">
+      <div class="strat-badge">
+        <div class="s-type">Long Term</div>
+        <div class="s-icon">🌱</div>
+      </div>
+      <div>
+        <div class="strat-name">Quality Stocks on Dip</div>
+        <div class="strat-desc">Great companies don't stay cheap. When Nifty 50 quality stocks fall 8–15% due to market correction (not company problems), buy in tranches.</div>
+        <ul class="strat-rules">
+          <li>Only Nifty 50 quality stocks: TCS, HDFCBANK, INFY, HDFC, Titan</li>
+          <li>Wait for a 10%+ pullback from recent highs</li>
+          <li>Verify: is the fall due to market fear or company problem?</li>
+          <li>If market fear only → buy 33% of planned position</li>
+          <li>Buy another 33% if it falls 5% more (average down)</li>
+          <li>Remaining 34% if fundamentals confirmed fine</li>
+          <li>Hold for 12–24 months. Set a reminder.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout tip">
+    <div class="callout-label">Paper Trading Rule</div>
+    <p>For your first 30 paper trades, <strong>only use one strategy at a time</strong>. If you trade ORB intraday, don't also take a swing trade that day. Mixing strategies confuses your learning. Track which strategy each trade uses in your journal.</p>
+  </div>
+</section>
+
+<!-- ── CHAPTER 6: RISK ── -->
+<section class="chapter" id="risk">
+  <div class="chapter-header">
+    <div class="chapter-num">06</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Capital Preservation</span>
+      <h2>Risk Management — The Only Rule That Matters</h2>
+      <p class="chapter-intro">Strategies win money. Risk management keeps you alive long enough to let the strategy work.</p>
+    </div>
+  </div>
+
+  <p>Most beginners blow their accounts not because of bad strategies, but because they took one large position and lost everything on it. The 1% rule prevents this.</p>
+
+  <div class="risk-example">
+    <div class="title">Live Example — The 1% Rule in Action</div>
+    <div class="risk-row"><span class="key">Paper Capital</span><span class="val">₹1,00,000</span></div>
+    <div class="risk-row"><span class="key">Max Risk Per Trade (1%)</span><span class="val yellow">₹1,000</span></div>
+    <div class="risk-row"><span class="key">Trade: Buy HDFCBANK at ₹1,650</span><span class="val">—</span></div>
+    <div class="risk-row"><span class="key">Stop Loss at ₹1,635 (₹15 below entry)</span><span class="val red">SL = ₹1,635</span></div>
+    <div class="risk-row"><span class="key">Risk per share</span><span class="val">₹15</span></div>
+    <div class="risk-row"><span class="key">Position Size = ₹1,000 ÷ ₹15</span><span class="val yellow">66 shares</span></div>
+    <div class="risk-row"><span class="key">Total Trade Value = 66 × ₹1,650</span><span class="val">₹1,08,900</span></div>
+    <div class="risk-row"><span class="key">If SL hit → Loss = 66 × ₹15</span><span class="val red">−₹990</span></div>
+    <div class="risk-row"><span class="key">Capital remaining after SL hit</span><span class="val green">₹99,010 (99%)</span></div>
+  </div>
+
+  <p>You can lose 10 trades in a row and still have 90% of your capital. That's survivability. Compare this to risking 10% per trade — after just 3 losses in a row, you'd be down 27%.</p>
+
+  <h3>Risk:Reward Ratio</h3>
+  <p>Never take a trade where you risk more than you expect to gain. The minimum acceptable R:R is 1:1.5. Aim for 1:2 or better.</p>
+
+  <div class="compare-grid">
+    <div class="compare-card nse">
+      <div class="label">Good Trade Setup</div>
+      <div class="name" style="font-size:16px">1 : 2 Risk Reward</div>
+      <ul>
+        <li>Entry: ₹500. Risk: ₹10 (SL at ₹490)</li>
+        <li>Target: ₹520 (₹20 gain)</li>
+        <li>Even with 40% win rate → profitable</li>
+        <li>10 trades: 4 wins (₹800) 6 losses (−₹600)</li>
+        <li>Net: +₹200 profit with 40% accuracy</li>
+      </ul>
+    </div>
+    <div class="compare-card bse">
+      <div class="label">Bad Trade Setup</div>
+      <div class="name" style="font-size:16px">1 : 0.5 Risk Reward</div>
+      <ul>
+        <li>Entry: ₹500. Risk: ₹20 (SL at ₹480)</li>
+        <li>Target: ₹510 (₹10 gain only)</li>
+        <li>Need 70%+ win rate just to break even</li>
+        <li>10 trades: 6 wins (₹600) 4 losses (−₹800)</li>
+        <li>Net: −₹200 loss with 60% accuracy</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Before Every Trade — Checklist</h3>
+  <ul class="checklist">
+    <li>Do I know exactly where my stop loss is?</li>
+    <li>Have I calculated my position size using the 1% rule?</li>
+    <li>Is my R:R ratio at least 1:1.5?</li>
+    <li>Is there a major news event today that could spike volatility?</li>
+    <li>Is the overall market trend aligned with my trade direction?</li>
+    <li>Am I trading because of a clear signal, not because I'm bored?</li>
+  </ul>
+</section>
+
+<!-- ── CHAPTER 7: SECTORS ── -->
+<section class="chapter" id="sectors">
+  <div class="chapter-header">
+    <div class="chapter-num">07</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Market Structure</span>
+      <h2>India's Key Sectors &amp; What Drives Them</h2>
+      <p class="chapter-intro">Different sectors respond to different triggers. Know what moves each one.</p>
+    </div>
+  </div>
+
+  <div class="sector-grid">
+    <div class="sector-card">
+      <div class="sector-icon">🏦</div>
+      <div class="sector-name">Banking &amp; Finance</div>
+      <div class="sector-stocks">HDFCBANK · ICICIBANK<br/>SBIN · AXISBANK<br/>KOTAKBANK</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">💻</div>
+      <div class="sector-name">Information Technology</div>
+      <div class="sector-stocks">TCS · INFY · WIPRO<br/>HCLTECH · TECHM<br/>LTI</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">💊</div>
+      <div class="sector-name">Pharmaceuticals</div>
+      <div class="sector-stocks">SUNPHARMA · DRREDDY<br/>CIPLA · DIVISLAB<br/>AUROPHARMA</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">🚗</div>
+      <div class="sector-name">Automobiles</div>
+      <div class="sector-stocks">MARUTI · TATAMOTORS<br/>BAJAJ-AUTO · M&amp;M<br/>HEROMOTOCO</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">🛒</div>
+      <div class="sector-name">FMCG</div>
+      <div class="sector-stocks">HINDUNILVR · ITC<br/>NESTLEIND · TITAN<br/>ASIANPAINT</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">⚡</div>
+      <div class="sector-name">Energy</div>
+      <div class="sector-stocks">RELIANCE · ONGC<br/>BPCL · IOC<br/>NTPC</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">🏗️</div>
+      <div class="sector-name">Infrastructure</div>
+      <div class="sector-stocks">LT · ADANIPORTS<br/>ULTRACEMCO<br/>HINDALCO</div>
+    </div>
+    <div class="sector-card">
+      <div class="sector-icon">📡</div>
+      <div class="sector-name">Telecom</div>
+      <div class="sector-stocks">BHARTIARTL<br/>IDEA · MTNL<br/>INDUS TOWERS</div>
+    </div>
+  </div>
+
+  <h3>What Triggers Each Sector</h3>
+  <p><strong>Banking:</strong> RBI repo rate decisions. Rising rates = margin pressure. Falling rates = sector rallies. Also watch credit growth data and NPA (bad loan) numbers.</p>
+  <p><strong>IT:</strong> US economy and USD/INR rate. When dollar strengthens, Indian IT companies earn more in rupee terms. US recession fears = IT sector selloff in India.</p>
+  <p><strong>Pharma:</strong> US FDA approvals/rejections. A single FDA warning letter can drop a pharma stock 15% in one day. Also watch generic drug price pressure in the US market.</p>
+  <p><strong>Auto:</strong> RBI interest rates (EMI affordability), fuel prices, monsoon season (rural demand), and EV transition news.</p>
+  <p><strong>FMCG:</strong> Monsoon performance (rural consumption), input cost inflation (palm oil, wheat prices), and urban consumer sentiment.</p>
+</section>
+
+<!-- ── CHAPTER 8: GLOSSARY ── -->
+<section class="chapter" id="glossary">
+  <div class="chapter-header">
+    <div class="chapter-num">08</div>
+    <div class="chapter-title-block">
+      <span class="chapter-label">Reference</span>
+      <h2>Glossary of Indian Market Terms</h2>
+      <p class="chapter-intro">Terms you'll encounter in news, on trading platforms, and in this system.</p>
+    </div>
+  </div>
+
+  <div class="glossary">
+    <div class="glossary-item"><div class="g-term">Intraday / MIS</div><div class="g-def">Buy and sell the same stock within the same trading day. Must be squared off before 3:30 PM. "MIS" (Margin Intraday Square-off) is how brokers call it.</div></div>
+    <div class="glossary-item"><div class="g-term">Delivery / CNC</div><div class="g-def">Buy and hold overnight or longer. "CNC" (Cash and Carry) on Zerodha/Groww. Used for swing and long-term trades.</div></div>
+    <div class="glossary-item"><div class="g-term">F&amp;O</div><div class="g-def">Futures and Options. Derivatives that derive value from an underlying stock or index. Higher risk, requires more capital. Not recommended for beginners.</div></div>
+    <div class="glossary-item"><div class="g-term">Lot Size</div><div class="g-def">In F&O, stocks trade in fixed lot sizes. Nifty lot = 50 units. Bank Nifty lot = 15 units. You can't buy "1 Nifty future" — minimum is 1 lot.</div></div>
+    <div class="glossary-item"><div class="g-term">Circuit Breaker</div><div class="g-def">If a stock moves more than 5%, 10%, or 20% in a day, trading is halted temporarily. Index circuit breakers halt entire market at 10%, 15%, 20% moves.</div></div>
+    <div class="glossary-item"><div class="g-term">Repo Rate</div><div class="g-def">The rate at which RBI lends to commercial banks. This flows to consumer loan rates (home loans, car loans). Markets watch this obsessively.</div></div>
+    <div class="glossary-item"><div class="g-term">Market Cap</div><div class="g-def">Share price × total shares outstanding. Large-cap: &gt;₹20,000 crore. Mid-cap: ₹5,000–20,000 crore. Small-cap: &lt;₹5,000 crore.</div></div>
+    <div class="glossary-item"><div class="g-term">SEBI</div><div class="g-def">Securities and Exchange Board of India. The regulator. All brokers, exchanges, and mutual funds must follow SEBI rules. Think of it as India's SEC.</div></div>
+    <div class="glossary-item"><div class="g-term">Nifty / Sensex</div><div class="g-def">Nifty 50 = NSE's top 50 stocks index. Sensex = BSE's top 30 stocks index. Both represent overall market health.</div></div>
+    <div class="glossary-item"><div class="g-term">Bull / Bear Market</div><div class="g-def">Bull = rising market (20%+ up from lows). Bear = falling market (20%+ down from highs). India has been in a secular bull market since 2003, with bear phases in 2008, 2020.</div></div>
+    <div class="glossary-item"><div class="g-term">OHLCV</div><div class="g-def">Open, High, Low, Close, Volume. The 5 data points every candle on a chart shows. The basis of all technical analysis.</div></div>
+    <div class="glossary-item"><div class="g-term">Candlestick</div><div class="g-def">A visual representation of OHLCV for a time period. Green candle = price went up. Red candle = price went down. The body shows Open-Close range.</div></div>
+    <div class="glossary-item"><div class="g-term">SIP</div><div class="g-def">Systematic Investment Plan. Investing a fixed amount every month regardless of market level. Best long-term strategy for most people. Not directly applicable to stock trading but used in mutual funds.</div></div>
+    <div class="glossary-item"><div class="g-term">T+1 Settlement</div><div class="g-def">When you sell a stock, the money hits your account the next trading day (T+1). India moved from T+2 to T+1 in 2023, making it one of the fastest settlement systems globally.</div></div>
+  </div>
+
+  <div class="callout tip" style="margin-top: 32px;">
+    <div class="callout-label">What to Learn Next</div>
+    <p>Once comfortable with this guide: (1) Learn candlestick patterns — Doji, Engulfing, Hammer. (2) Study Zerodha Varsity (free, India's best trading education resource). (3) Start logging paper trades in your journal. Every trade teaches you something no guide can.</p>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<footer>
+  <strong>India Trading System</strong> &nbsp;·&nbsp; Knowledge Repository &nbsp;·&nbsp; Phase 1 Foundation &nbsp;·&nbsp; achallakiran.github.io/india-trading-system<br/>
+  <span style="margin-top:8px;display:block;">This is educational content for paper trading only. Not financial advice.</span>
+</footer>
+
+<script>
+// Reading progress bar
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('rbar').style.width = pct + '%';
+});
+</script>
+
+</body>
+</html>
