@@ -71,7 +71,8 @@
 
 | Date | What Was Done | Next Session Should |
 |------|--------------|---------------------|
-| 2026-05-05 | Project setup, Groww API connected, Phase 1-4a complete, screener built | Run screener during market hours, integrate with /trade |
+| 2026-05-05 | Project setup, Groww API connected, Phase 1-4 complete, screener built, first paper trades executed | Check positions P&L, run /trader → Screen + Trade, fix TATAMOTORS symbol error |
+| 2026-05-05 | Scanned all 49 Nifty 50 stocks. Bought APOLLOHOSP @₹7750, HINDALCO @₹1057 (x5), BAJAJFINSV @₹1791 (x5). Cash: ₹78,010 | Tomorrow: refresh Groww token, run /trader, review open positions, scan again |
 
 ---
 

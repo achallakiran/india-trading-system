@@ -1,5 +1,42 @@
 {
   "version": "1.0",
   "created": "2026-05-05",
-  "learnings": []
+  "learnings": [
+    {
+      "timestamp": "2026-05-05T23:41:23.507574",
+      "type": "decision",
+      "symbol": "APOLLOHOSP",
+      "action": "BUY",
+      "signals_snapshot": {
+        "price": 7750.0
+      },
+      "reasoning": "Above all EMAs, MACD bullish crossover (diff 6.95), RSI 54 healthy range, volume 136% above avg",
+      "confidence": 0.82,
+      "outcome": null
+    },
+    {
+      "timestamp": "2026-05-05T23:41:23.530218",
+      "type": "decision",
+      "symbol": "HINDALCO",
+      "action": "BUY",
+      "signals_snapshot": {
+        "price": 1057.0
+      },
+      "reasoning": "Fresh MACD bullish crossover, RSI 57, above all EMAs, strong volume 192% of avg",
+      "confidence": 0.78,
+      "outcome": null
+    },
+    {
+      "timestamp": "2026-05-05T23:41:23.554278",
+      "type": "decision",
+      "symbol": "BAJAJFINSV",
+      "action": "BUY",
+      "signals_snapshot": {
+        "price": 1791.0
+      },
+      "reasoning": "Financial sector leader, above all EMAs, MACD bullish, RSI 58",
+      "confidence": 0.75,
+      "outcome": null
+    }
+  ]
 }
