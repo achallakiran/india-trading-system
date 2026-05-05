@@ -1,1 +1,9 @@
 .claude/
+__pycache__/
+*.pyc
+venv/
+.env
+data/trades.json
+data/portfolio.json
+node_modules/
+dist/

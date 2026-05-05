@@ -1,0 +1,7 @@
+growwapi
+anthropic
+pandas
+numpy
+requests
+python-dotenv
+ta
