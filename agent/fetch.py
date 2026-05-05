@@ -29,10 +29,13 @@ def fetch_all(symbols: list[str]) -> dict:
             quote = get_quote(symbol)
             candles = get_historical(symbol, days=90)
             signals = compute_signals(candles)
-            current_prices[symbol] = signals.get("current_close", 0)
+            # use live last_price from quote for P&L, fall back to candle close
+            live_price = quote.get("last_price") or signals.get("current_close", 0)
+            current_prices[symbol] = live_price
             report["stocks"][symbol] = {
                 "quote": quote,
                 "signals": signals,
+                "live_price": live_price,
             }
         except Exception as e:
             report["errors"].append({"symbol": symbol, "error": str(e)})
