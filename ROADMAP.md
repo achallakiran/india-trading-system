@@ -44,10 +44,14 @@
 - Update `/trade` command to run screener first, then decide on top candidates
 - Add `/screen` as a standalone command
 
-### 🔲 Phase 5 — Additional Data Sources
-- **News sentiment** — fetch headlines for each candidate, score positive/negative
-- **FII/DII flows** — scrape NSE daily data, use as market-wide filter
-- **Sector strength** — which sectors are outperforming Nifty
+### ✅ Phase 5 — Additional Data Sources
+- News sentiment from ET, Moneycontrol, Business Standard RSS feeds (no API key)
+- FII/DII flows from NSE public API — used as market-wide filter
+- News score adjusts screener score ±5 per stock
+- Sector strength — 🔲 pending
+
+### 🔲 Phase 4c — Screener wired into /trader seamlessly
+- /trader → Screen + Trade runs screener then auto-fetches top candidates
 
 ### ✅ Phase 6a — Outcome Tracking
 - Every SELL automatically closes the loop on the original BUY decision

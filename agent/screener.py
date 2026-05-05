@@ -8,6 +8,8 @@ import json
 import warnings
 from datetime import datetime
 from agent.data.groww import get_quote, get_historical
+from agent.data.news import get_market_sentiment, get_stock_news
+from agent.data.fii_dii import get_fii_dii_flows
 from agent.signals.technical import compute_signals
 
 # Nifty 50 constituents (updated May 2026)
@@ -99,6 +101,11 @@ def run_screener(symbols: list = None, top_n: int = 10) -> dict:
     errors = []
     total = len(symbols)
 
+    print(f"Fetching market context...", flush=True)
+    market_sentiment = get_market_sentiment()
+    fii_dii = get_fii_dii_flows()
+    print(f"  Sentiment: {market_sentiment.get('sentiment')} | FII/DII: {fii_dii.get('signal', 'N/A')}")
+
     print(f"Scanning {total} stocks...", flush=True)
 
     for i, symbol in enumerate(symbols, 1):
@@ -111,14 +118,25 @@ def run_screener(symbols: list = None, top_n: int = 10) -> dict:
                 continue
             signals = compute_signals(candles)
             score, reasons, flags = score_stock(signals, quote)
+
+            # news bonus: +5 if positive news, -5 if negative
+            news = get_stock_news(symbol)
+            if news.get("sentiment") == "POSITIVE":
+                score += 5
+                reasons.append(f"Positive news ({news['mentions']} mentions)")
+            elif news.get("sentiment") == "NEGATIVE":
+                score -= 5
+                flags.append(f"Negative news ({news['mentions']} mentions)")
+
             results.append({
                 "symbol": symbol,
-                "score": score,
+                "score": min(100, max(0, score)),
                 "price": signals.get("current_close"),
                 "change_pct": signals.get("price_change_pct"),
                 "rsi": signals.get("rsi_14"),
                 "macd_diff": signals.get("macd_diff"),
                 "signals": signals,
+                "news": news,
                 "reasons": reasons,
                 "flags": flags,
             })
@@ -131,6 +149,10 @@ def run_screener(symbols: list = None, top_n: int = 10) -> dict:
 
     return {
         "timestamp": datetime.now().isoformat(),
+        "market_context": {
+            "sentiment": market_sentiment,
+            "fii_dii": fii_dii,
+        },
         "total_scanned": len(results),
         "errors": len(errors),
         "top_candidates": results[:top_n],
