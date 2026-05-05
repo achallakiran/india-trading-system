@@ -49,10 +49,14 @@
 - **FII/DII flows** — scrape NSE daily data, use as market-wide filter
 - **Sector strength** — which sectors are outperforming Nifty
 
-### 🔲 Phase 6 — Learning Layer
-- After each trade closes, record outcome (profit/loss)
+### ✅ Phase 6a — Outcome Tracking
+- Every SELL automatically closes the loop on the original BUY decision
+- `record_outcome()` logs exit price, P&L, WIN/LOSS/BREAKEVEN
+- `agent/review.py` shows win rate, avg P&L, best/worst trades
+
+### 🔲 Phase 6b — Strategy Learning
 - Weekly review: which signals predicted correctly, which didn't
-- Claude updates strategy scoring weights based on observed accuracy
+- Claude updates scoring weights in screener based on observed accuracy
 
 ### 🔲 Phase 7 — React Dashboard
 - Visual portfolio tracker
