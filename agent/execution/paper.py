@@ -4,8 +4,30 @@ from datetime import datetime
 
 PORTFOLIO_FILE = os.path.join(os.path.dirname(__file__), "../../data/portfolio.json")
 TRADES_FILE = os.path.join(os.path.dirname(__file__), "../../data/trades.json")
+CONFIG_FILE = os.path.join(os.path.dirname(__file__), "../../data/config.json")
 
-INITIAL_CAPITAL = 100000.0
+DEFAULT_CAPITAL = 100000.0
+
+
+def get_config() -> dict:
+    try:
+        with open(CONFIG_FILE) as f:
+            return json.load(f)
+    except FileNotFoundError:
+        config = {
+            "initial_capital": DEFAULT_CAPITAL,
+            "paper_mode": True,
+            "created": datetime.now().isoformat(),
+            "note": "Edit initial_capital here to change starting paper money"
+        }
+        os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
+        with open(CONFIG_FILE, "w") as f:
+            json.dump(config, f, indent=2)
+        return config
+
+
+def get_initial_capital() -> float:
+    return get_config().get("initial_capital", DEFAULT_CAPITAL)
 
 
 def _load(path, default):
@@ -23,8 +45,10 @@ def _save(path, data):
 
 
 def get_portfolio():
+    initial = get_initial_capital()
     return _load(PORTFOLIO_FILE, {
-        "cash": INITIAL_CAPITAL,
+        "initial_capital": initial,
+        "cash": initial,
         "positions": {},
         "created": datetime.now().isoformat(),
     })
@@ -91,6 +115,7 @@ def sell(symbol: str, price: float, quantity: int, reason: str = "") -> dict:
 
 def get_summary(current_prices: dict = None) -> dict:
     portfolio = get_portfolio()
+    initial = portfolio.get("initial_capital", get_initial_capital())
     positions_value = 0
     positions_detail = []
     for sym, pos in portfolio["positions"].items():
@@ -108,9 +133,11 @@ def get_summary(current_prices: dict = None) -> dict:
         })
     total_value = portfolio["cash"] + positions_value
     return {
+        "initial_capital": initial,
         "cash": round(portfolio["cash"], 2),
         "positions_value": round(positions_value, 2),
         "total_value": round(total_value, 2),
-        "total_pnl": round(total_value - INITIAL_CAPITAL, 2),
+        "total_pnl": round(total_value - initial, 2),
+        "total_pnl_pct": round(((total_value - initial) / initial) * 100, 2),
         "positions": positions_detail,
     }
